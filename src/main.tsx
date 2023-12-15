@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import { guardWrapper } from "./helper";
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   guardWrapper([
     {
       path: "/",
