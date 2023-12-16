@@ -2,6 +2,8 @@ import { Suspense, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { router as R } from "./main";
 
+type Next = void | boolean | Promise<void | boolean>
+
 let data: null | string = null;
 let fetching = false;
 
@@ -22,7 +24,7 @@ const AsyncGuard = ({ children }: { children: React.ReactNode }) => {
   }
 };
 
-const hook = ({
+const beforeEach = ({
   from,
   to,
   router,
@@ -30,7 +32,7 @@ const hook = ({
   from: string;
   to: string;
   router: typeof R;
-}) => {
+}): Next => {
   console.log(from, to, router);
 };
 
@@ -40,7 +42,7 @@ export const Guard = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const to = pathname;
-    hook({ from: from.current, to, router: R });
+    beforeEach({ from: from.current, to, router: R });
     from.current = to;
   }, [pathname]);
 
